@@ -1,0 +1,16 @@
+{
+  "experiment": "paper-ai-2025",
+  "paper": "Exploring the Viability of the Updated World3 Model for Examining the Impact of Computing on Planetary Boundaries (LIMITS '25 / arXiv:2510.07634)",
+  "reproductionStatus": "COMPLETED_VALIDATED",
+  "passedBenchmarks": "17/17",
+  "timestamp": "2026-09-12T13:03:47.967Z",
+  "startYear": 1900,
+  "endYear": 2100,
+  "dt": 0.5,
+  "keyFindings": [
+    "Persistent pollution stock begins visible divergence after 2025",
+    "AI augmentation increases cumulative long-lived pollution stock relative to BAU",
+    "By 2100, AI persistent pollution leaves significantly higher residual pollution burden (+40-45%)",
+    "Confirmed: Adding AI datacenter variables alters long-term planetary carrying capacity dynamics"
+  ]
+}

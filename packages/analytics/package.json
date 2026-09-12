@@ -1,5 +1,5 @@
 {
-  "name": "@world26/schemas",
+  "name": "@world26/analytics",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -15,10 +15,12 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "lint": "echo '@world26/schemas: lint passed'",
+    "lint": "echo '@world26/analytics: lint passed'",
     "test": "vitest run"
   },
   "dependencies": {
+    "@world26/schemas": "workspace:*",
+    "@world26/model": "workspace:*",
     "zod": "^3.24.2"
   },
   "devDependencies": {

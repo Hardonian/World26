@@ -1,0 +1,76 @@
+{
+  "version": "2026.1",
+  "lastUpdated": "2026-03-01",
+  "sources": [
+    {
+      "id": "un_desa_wpp_2024",
+      "name": "United Nations World Population Prospects (2024 Revision)",
+      "organization": "United Nations Department of Economic and Social Affairs, Population Division",
+      "url": "https://population.un.org/wpp/",
+      "license": "CC BY 3.0 IGO",
+      "description": "Historical population series 1950-2023, medium fertility projections through 2100, crude birth rates, crude death rates, and life expectancy.",
+      "coverage": "Global and 10 world regions, 1950-2100",
+      "citation": "United Nations, Department of Economic and Social Affairs, Population Division (2024). World Population Prospects 2024."
+    },
+    {
+      "id": "global_carbon_project_2024",
+      "name": "Global Carbon Budget 2024",
+      "organization": "Global Carbon Project / Future Earth",
+      "url": "https://globalcarbonbudget.org",
+      "license": "CC BY 4.0",
+      "description": "Global fossil and land-use CO2 emissions, atmospheric concentrations (Mauna Loa / NOAA), ocean and land carbon sinks.",
+      "coverage": "Global, 1750-2024",
+      "citation": "Friedlingstein et al. (2024). Global Carbon Budget 2024. Earth System Science Data."
+    },
+    {
+      "id": "iea_weo_2024",
+      "name": "World Energy Outlook 2024 & Energy and AI Report",
+      "organization": "International Energy Agency (IEA)",
+      "url": "https://www.iea.org/reports/world-energy-outlook-2024",
+      "license": "Terms of Use / Non-commercial academic research",
+      "description": "Global energy generation, fossil vs renewable shares, grid carbon intensities, data center electricity demand.",
+      "coverage": "Global, 1970-2024",
+      "citation": "IEA (2024). World Energy Outlook 2024. International Energy Agency, Paris."
+    },
+    {
+      "id": "stockholm_resilience_centre_2023_2025",
+      "name": "Planetary Boundaries Assessment (2023 Update & 2025/2026 Transgression Updates)",
+      "organization": "Stockholm Resilience Centre & Potsdam Institute for Climate Impact Research",
+      "url": "https://www.stockholmresilience.org/research/planetary-boundaries.html",
+      "license": "Open Academic",
+      "description": "Control variables, thresholds, and current status for all 9 Earth System boundaries, including the recent transgression assessment of ocean acidification.",
+      "coverage": "Global Earth System, pre-industrial to 2026",
+      "citation": "Richardson et al. (2023). Earth beyond six of nine planetary boundaries. Science Advances 9, eadh2458."
+    },
+    {
+      "id": "limits_25_ai_world3",
+      "name": "Exploring the Viability of the Updated World3 Model for Examining the Impact of Computing on Planetary Boundaries",
+      "organization": "University of Toronto (LIMITS '25)",
+      "url": "https://arxiv.org/abs/2510.07634",
+      "license": "CC BY-NC-SA 4.0",
+      "description": "System dynamics formulation of AI data center capital share, CO2 emissions, e-waste intensity, and persistent pollution in World3-03.",
+      "coverage": "Global, 1900-2100",
+      "citation": "Guliyeva, N., Bhardwaj, E., & Becker, C. (2025). LIMITS '25 / arXiv:2510.07634."
+    },
+    {
+      "id": "world_bank_wdi_2024",
+      "name": "World Bank World Development Indicators",
+      "organization": "The World Bank Group",
+      "url": "https://databank.worldbank.org/source/world-development-indicators",
+      "license": "CC BY 4.0",
+      "description": "Global GDP (constant USD), manufacturing value added, industrial capital formation, inequality metrics.",
+      "coverage": "Global & regional, 1960-2024",
+      "citation": "World Bank (2024). World Development Indicators."
+    },
+    {
+      "id": "faostat_2024",
+      "name": "FAOSTAT Food and Agriculture Database",
+      "organization": "Food and Agriculture Organization of the United Nations",
+      "url": "https://www.fao.org/faostat",
+      "license": "CC BY-NC-SA 3.0 IGO",
+      "description": "Global arable land, cereal yield per hectare, agricultural fertilizer consumption (N, P, K), food production index.",
+      "coverage": "Global & regional, 1961-2024",
+      "citation": "FAO (2024). FAOSTAT Statistical Database."
+    }
+  ]
+}

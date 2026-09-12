@@ -1,0 +1,8 @@
+{
+  "VERSION": "caa692594cece87cfff056d7da05893ddd771cb2f3d98874b71ba93dc7fea06a",
+  "sources.yaml": "fc20296304178f25c17116cfb83c02d3ea04c2ff299834afe0318773b83bb138",
+  "boundaries/current.json": "a8765f9358c3e638e464c650575547346ef74a4a36cac9ef0b9f5beff978d819",
+  "parameters/defaults.json": "1b5968cc69c3076c3e83ba1493da860500213853813c9d887c750fc1c7ae2e50",
+  "historical/world_historical_1960_2025.json": "3d13fe1882254330026a20a10feb13bbcdf1bc53d07eed2ea0430d19fc9bac7c",
+  "regions/regions_10.json": "5dd2e06aa66f68ead10603c086544d914557042710285fefe99fb95785ad61df"
+}
