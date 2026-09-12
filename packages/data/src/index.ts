@@ -32,3 +32,5 @@ export function loadSources(): { version: string; lastUpdated?: string; sources:
 }
 
 export * from './static-data.js';
+export * from './connectors/index.js';
+

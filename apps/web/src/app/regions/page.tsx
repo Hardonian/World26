@@ -54,9 +54,8 @@ export default function RegionsPage() {
 
   return (
     <div className="min-h-screen bg-[#070a0f] text-slate-100 flex flex-col">
-      <HeaderNav />
-
       <main className="flex-1 max-w-[1720px] mx-auto w-full p-4 lg:p-6 space-y-6">
+
         {/* Top Header & Conservation Banner */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-lg border border-slate-800/80 bg-slate-900/40 backdrop-blur-sm">
           <div>
