@@ -4,7 +4,7 @@
 
 WORLD//26 adheres to strict scientific reproducibility standards. All empirical inputs trace through an immutable, version-controlled pipeline:
 
-```
+```text
 [Primary Open Sources (16 International Providers)]
   (UN DESA, GCP, NOAA, NASA, ECMWF, OWID, IEA, Ember, SRC, World Bank, FAO, WRI, USGS, Epoch AI, IIASA)
           │
@@ -44,7 +44,7 @@ The platform indexes and connects to 16 major open science data providers:
 | **World Bank WDI** | The World Bank Group | GDP (PPP), capital formation, inequality | CC BY 4.0 |
 | **FAOSTAT** | UN Food & Agriculture Organization | Cereal yield, arable land, N/P fertilizer | CC BY-NC-SA 3.0 IGO |
 | **WRI Aqueduct** | World Resources Institute | Baseline water stress, basin risk | CC BY 4.0 |
-| **USGS Mineral Summaries**| U.S. Geological Survey | Copper, lithium, cobalt, rare earth reserves | U.S. Public Domain |
+| **USGS Mineral Summaries** | U.S. Geological Survey | Copper, lithium, cobalt, rare earth reserves | U.S. Public Domain |
 | **Epoch AI Compute** | Epoch AI / SemiAnalysis | Frontier AI compute capacity (EFLOPS), hardware fleet | CC BY 4.0 |
 | **LIMITS '25 Paper** | University of Toronto (arXiv:2510.07634) | AI data center pollution & World3 integration | CC BY-NC-SA 4.0 |
 | **IIASA SSP Database** | IIASA | Shared Socioeconomic Pathways (SSP1-5) | Open Research License |

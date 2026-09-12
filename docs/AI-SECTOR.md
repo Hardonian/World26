@@ -8,7 +8,7 @@ Unlike prior exploratory works that simply injected AI energy estimates into a m
 
 ## 2. Sector Stocks & Physical Flows
 
-```
+```text
 [Capital Investment]
         │
         ▼
@@ -31,6 +31,7 @@ Unlike prior exploratory works that simply injected AI energy estimates into a m
 ```
 
 ### State Stocks
+
 1. **Installed Compute Capacity ($EFLOP/s$):** Active peak FP16/BF16 tensor accelerator clusters.
 2. **Active Accelerator Fleet:** Physical count of deployed specialized accelerators (e.g., modern GPUs and TPUs).
 3. **Semiconductor Manufacturing Capital:** Specialized fab and lithography asset inventory.
@@ -38,6 +39,7 @@ Unlike prior exploratory works that simply injected AI energy estimates into a m
 5. **Accumulated Electronic Waste Stock ($Mt$):** Toxic heavy metals, plastics, and flame retardants from retired computing hardware.
 
 ### Flow Dynamics
+
 - **Deployments & Retirements:** Hardware turnover based on useful lifespan (calibrated default: 3.5 years; adjustable between 1.5 and 8.0 years).
 - **Operational Electricity Demand:** Computed dynamically from compute density ($kW/EFLOP$), effective Power Usage Effectiveness ($PUE$), and cluster utilization.
 - **Evaporative Cooling Water:** Consumptive blue water loss per kWh of compute energy.
@@ -50,14 +52,17 @@ Unlike prior exploratory works that simply injected AI energy estimates into a m
 WORLD//26 models second-generation computing sector features:
 
 ### A. Training vs. Inference Compute Split
+
 - **Training Allocation:** Frontier foundational model pre-training and recursive self-improvement clusters (~35% of compute in 2020-2025, shifting towards ~10-15% long-term).
 - **Inference Allocation:** Real-time query execution, autonomous agent runtimes, and enterprise integration (scaling to 85-90% of aggregate compute load).
 
 ### B. Dynamic PUE Trajectory (Immersion & Direct-to-Chip Cooling)
+
 - As thermal design power (TDP) per accelerator socket exceeds 1,000W, facilities transition from legacy air-cooling ($PUE \approx 1.35\text{--}1.40$) to direct-to-chip water and two-phase dielectric immersion cooling.
 - The model smoothly transitions effective PUE towards a user-defined target ($PUE_{\text{target}} \approx 1.05\text{--}1.12$).
 
 ### C. Post-Silicon & Photonic Computing Paradigm Shift
+
 - Lever: `post_silicon_transition_year` (default 2038; policy lever range 2030–2050).
 - Models deployment of optical matrix processors, neuromorphic architectures, and cryogenic interconnects.
 - Yields a multi-fold boost in FLOP/Watt energy efficiency ($\text{photonic\_efficiency\_multiplier} \approx 4\times\text{--}10\times$), dampening electrical grid bottlenecks.

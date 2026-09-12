@@ -149,7 +149,7 @@ impl World26Model {
 
     /// Step using Runge-Kutta 4th order (RK4)
     pub fn step(&mut self, dt: f64) {
-        let (k1, _s1) = evaluate_derivatives(&self.state, &self.params);
+        let (k1, _) = evaluate_derivatives(&self.state, &self.params);
 
         // Step 2
         let mut s_half = self.state.clone();

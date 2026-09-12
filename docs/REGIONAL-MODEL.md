@@ -32,6 +32,7 @@ export class RegionalWorld26SimulatorTs {
 ```
 
 Each region models:
+
 - Population and labor force dynamics
 - Industrial output, capital accumulation, and GDP (constant PPP)
 - Electricity and primary energy demand
@@ -63,6 +64,7 @@ $$\sum_{i=1}^{10} \text{NetCopperTrade}_i = 0 \quad (\text{tolerance} < 10^{-6}\
 ## 4. Scientific Honesty & Provenance
 
 All regional baseline allocations are grounded in official empirical datasets from:
+
 - **UN DESA World Population Prospects (2024 Revision)**
 - **World Bank World Development Indicators (2024)**
 - **IEA World Energy Outlook & Energy and AI Report (2024)**
