@@ -3,6 +3,7 @@ import { detectInflections, attributeInflection } from './causal.js';
 import { detectMilestones } from './milestones.js';
 import { runOatSensitivityAnalysis } from './sensitivity.js';
 import { compareScenarios } from './compare.js';
+import { exportToIamcCsv, exportToIamcRows } from './iamc.js';
 
 describe('@world26/analytics', () => {
   it('detects peaks and troughs in time series', () => {
@@ -61,5 +62,25 @@ describe('@world26/analytics', () => {
     const comps = compareScenarios(seriesA, seriesB);
     expect(comps.length).toBe(2);
     expect(comps.find((c) => c.variable === 'temperature_anomaly')?.delta_2100).toBeCloseTo(0.6);
+  });
+
+  it('formats simulation run results into standard IPCC/IIASA IAMC format', () => {
+    const mockRun: any = {
+      manifest: {
+        scenarioId: 'test_scenario',
+        scenarioName: 'Test Scenario'
+      },
+      time: [2020, 2050, 2100],
+      series: {
+        population: [7.8e9, 9.5e9, 8.8e9],
+        co2_emissions_gt: [35.0, 20.0, 5.0],
+        temperature_anomaly: [1.1, 1.6, 1.9]
+      }
+    };
+
+    const csv = exportToIamcCsv(mockRun, { years: [2020, 2050, 2100] });
+    expect(csv).toContain('Model,Scenario,Region,Variable,Unit,2020,2050,2100');
+    expect(csv).toContain('"Population","million",7800,9500,8800');
+    expect(csv).toContain('"Temperature|Global Mean"');
   });
 });

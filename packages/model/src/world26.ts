@@ -28,6 +28,10 @@ export const DEFAULT_WORLD26_PARAMETERS: World26ModelParameters = {
   food_waste_reduction_pct: 0.0,
   circular_economy_mandate: 0.0,
   universal_basic_services_strength: 0.0,
+  amoc_collapse_threshold_temp: 2.2,
+  permafrost_release_rate: 0.025,
+  amazon_dieback_threshold_temp: 2.1,
+  sea_level_rise_rate_m_per_c: 0.0035,
 };
 
 export class World26SimulatorTs {
@@ -108,6 +112,11 @@ export class World26SimulatorTs {
       human_wellbeing_index: 0.25,
       social_tension_index: 0.35,
       governance_capacity_index: 0.40,
+      amoc_stability_index: 1.0,
+      permafrost_thaw_co2_gt: 0.0,
+      permafrost_cumulative_gt: 0.0,
+      amazon_forest_fraction: 0.95,
+      sea_level_rise_m: 0.0,
     };
   }
 
@@ -205,9 +214,30 @@ export class World26SimulatorTs {
     s.ai_embodied_co2_gt = (s.ai_hardware_turnover_rate * 1.0e6 * 1.2) / 1.0e9;
     const fossil_co2 = s.fossil_energy_ej * 0.068;
     const land_co2 = Math.max(0.5, 3.5 * (1.0 - Math.max(0, t - 1960.0) / 100.0));
-    s.co2_emissions_gt = fossil_co2 + land_co2 + s.ai_operational_co2_gt + s.ai_embodied_co2_gt;
 
-    const d_co2 = (s.co2_emissions_gt * 0.48) / 3.8;
+    // Earth System Tipping: Permafrost thaw methane/carbon release pulse (Armstrong McKay et al. 2022)
+    const excess_warming = Math.max(0, s.temperature_anomaly - 1.5);
+    s.permafrost_thaw_co2_gt = excess_warming > 0
+      ? Math.min(10.0, excess_warming * excess_warming * this.params.permafrost_release_rate * 6.0)
+      : 0.0;
+    s.permafrost_cumulative_gt += s.permafrost_thaw_co2_gt * dt;
+
+    s.co2_emissions_gt = fossil_co2 + land_co2 + s.ai_operational_co2_gt + s.ai_embodied_co2_gt + s.permafrost_thaw_co2_gt;
+
+    // Earth System Tipping: AMOC Stability Index (Atlantic Meridional Overturning Circulation)
+    const amoc_stress = Math.max(0, s.temperature_anomaly / this.params.amoc_collapse_threshold_temp);
+    s.amoc_stability_index = Math.max(0.0, Math.min(1.0, 1.0 / (1.0 + Math.exp(7.0 * (amoc_stress - 0.85)))));
+
+    // Earth System Tipping: Amazon Rainforest Dieback Fraction
+    const amazon_stress = Math.max(0, (s.temperature_anomaly - 1.2) / (this.params.amazon_dieback_threshold_temp - 1.2));
+    s.amazon_forest_fraction = Math.max(0.35, Math.min(0.95, 0.95 - 0.50 / (1.0 + Math.exp(-6.0 * (amazon_stress - 0.75)))));
+
+    // Earth System Tipping: Sea Level Rise Commitment (meters SLE)
+    s.sea_level_rise_m += Math.max(0, s.temperature_anomaly) * this.params.sea_level_rise_rate_m_per_c * dt;
+
+    // Ocean carbon sink efficiency modulates with AMOC stability (ocean circulation drawdown)
+    const ocean_sink_efficiency = 0.70 + 0.30 * s.amoc_stability_index;
+    const d_co2 = (s.co2_emissions_gt * (0.48 / ocean_sink_efficiency)) / 3.8;
     s.atmospheric_co2_ppm = Math.max(200.0, s.atmospheric_co2_ppm + d_co2 * dt);
     s.radiative_forcing = 5.35 * Math.log(s.atmospheric_co2_ppm / 280.0);
 

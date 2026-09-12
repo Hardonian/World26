@@ -126,10 +126,39 @@ pub fn evaluate_derivatives(
 
     let fossil_co2 = s.fossil_energy_ej * 0.068; // ~68 Mt CO2 per EJ fossil
     let land_use_co2 = (3.5 * (1.0 - (t - 1960.0).max(0.0) / 100.0)).max(0.5);
-    s.co2_emissions_gt = fossil_co2 + land_use_co2 + s.ai_operational_co2_gt + s.ai_embodied_co2_gt;
 
-    // Carbon cycle: airborne fraction is ~48% of total emissions, 1 ppm = 7.82 Gt CO2
-    let d_atmospheric_co2 = (s.co2_emissions_gt * 0.48) / 3.8;
+    // Earth System Tipping: Permafrost thaw methane/carbon release pulse (Armstrong McKay et al. 2022)
+    let excess_warming = (s.temperature_anomaly - 1.5).max(0.0);
+    s.permafrost_thaw_co2_gt = if excess_warming > 0.0 {
+        (excess_warming * excess_warming * params.permafrost_release_rate * 6.0).min(10.0)
+    } else {
+        0.0
+    };
+    s.permafrost_cumulative_gt += s.permafrost_thaw_co2_gt * 0.25;
+
+    s.co2_emissions_gt = fossil_co2
+        + land_use_co2
+        + s.ai_operational_co2_gt
+        + s.ai_embodied_co2_gt
+        + s.permafrost_thaw_co2_gt;
+
+    // Earth System Tipping: AMOC Stability Index (Atlantic Meridional Overturning Circulation)
+    let amoc_stress = (s.temperature_anomaly / params.amoc_collapse_threshold_temp).max(0.0);
+    s.amoc_stability_index = (1.0 / (1.0 + (7.0 * (amoc_stress - 0.85)).exp())).clamp(0.0, 1.0);
+
+    // Earth System Tipping: Amazon Rainforest Dieback Fraction
+    let amazon_stress =
+        ((s.temperature_anomaly - 1.2) / (params.amazon_dieback_threshold_temp - 1.2)).max(0.0);
+    s.amazon_forest_fraction =
+        (0.95 - 0.50 / (1.0 + (-6.0 * (amazon_stress - 0.75)).exp())).clamp(0.35, 0.95);
+
+    // Earth System Tipping: Sea Level Rise Commitment (meters SLE)
+    s.sea_level_rise_m +=
+        s.temperature_anomaly.max(0.0) * params.sea_level_rise_rate_m_per_c * 0.25;
+
+    // Ocean carbon sink efficiency modulates with AMOC stability (ocean circulation drawdown)
+    let ocean_sink_efficiency = 0.70 + 0.30 * s.amoc_stability_index;
+    let d_atmospheric_co2 = (s.co2_emissions_gt * (0.48 / ocean_sink_efficiency)) / 3.8;
 
     // Radiative forcing: Delta F = 5.35 * ln(C / C0)
     s.radiative_forcing = 5.35 * (s.atmospheric_co2_ppm / 280.0).ln();

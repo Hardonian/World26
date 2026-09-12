@@ -729,7 +729,8 @@ export const HISTORICAL_SERIES_DATA = {
       "life_expectancy": 73.6,
       "compute_eflops": 350
     }
-  ]
+  ],
+  "lastSynced": "2026-09-12T15:24:28.675Z"
 } as any;
 
 export const REGIONS_DATA: { version: string; regions: RegionalProfile[] } = {
@@ -1128,8 +1129,7 @@ export const SOURCES_DATA: { version: string; lastUpdated?: string; sources: any
       "license": "Open Academic Research License",
       "description": "Harmonized global and 5/10/32 region socioeconomic and emissions trajectories for SSP1 through SSP5 used in IPCC AR6.",
       "coverage": "Global and macro-regions, 2010-2100",
-      "citation": "Riahi, K. et al. (2017). The Shared Socioeconomic Pathways and their energy, land use, and greenhouse gas implications. Global Environmental Change."
+      "citation": "Riahi, K. et al. (2017). The Shared Socioeconomic Pathways and their energy, land use, and greenhouse gas emissions implications. Global Environmental Change."
     }
   ]
 } as any;
-

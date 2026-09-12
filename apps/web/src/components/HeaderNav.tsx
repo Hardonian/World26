@@ -12,7 +12,8 @@ import {
   RotateCcw, 
   Database,
   Cpu,
-  MapPin
+  MapPin,
+  Terminal
 } from 'lucide-react';
 
 const NAV_ITEMS = [
@@ -20,6 +21,7 @@ const NAV_ITEMS = [
   { href: '/regions', label: '10 Regions', icon: MapPin },
   { href: '/boundaries', label: 'Boundaries', icon: Globe },
   { href: '/causal', label: 'Causal Graph', icon: GitFork },
+  { href: '/analytics', label: 'SQL Analytics', icon: Terminal },
   { href: '/compare', label: 'Compare', icon: Columns },
   { href: '/challenges', label: 'Challenges', icon: Award },
   { href: '/lab', label: 'Experiment Lab', icon: FlaskConical },

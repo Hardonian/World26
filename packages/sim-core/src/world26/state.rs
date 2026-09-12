@@ -123,6 +123,13 @@ pub struct World26State {
 
     // 20. Trade / Regional Metrics
     pub global_trade_openness: f64,
+
+    // 21. Earth System Tipping Elements
+    pub amoc_stability_index: f64,
+    pub permafrost_thaw_co2_gt: f64,
+    pub permafrost_cumulative_gt: f64,
+    pub amazon_forest_fraction: f64,
+    pub sea_level_rise_m: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -160,6 +167,12 @@ pub struct World26Parameters {
     pub food_waste_reduction_pct: f64,
     pub circular_economy_mandate: f64,
     pub universal_basic_services_strength: f64,
+
+    // Earth System Tipping thresholds
+    pub amoc_collapse_threshold_temp: f64,
+    pub permafrost_release_rate: f64,
+    pub amazon_dieback_threshold_temp: f64,
+    pub sea_level_rise_rate_m_per_c: f64,
 }
 
 impl Default for World26Parameters {
@@ -187,6 +200,10 @@ impl Default for World26Parameters {
             food_waste_reduction_pct: 0.0,
             circular_economy_mandate: 0.0,
             universal_basic_services_strength: 0.0,
+            amoc_collapse_threshold_temp: 2.2,
+            permafrost_release_rate: 0.025,
+            amazon_dieback_threshold_temp: 2.1,
+            sea_level_rise_rate_m_per_c: 0.0035,
         }
     }
 }

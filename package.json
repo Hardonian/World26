@@ -15,6 +15,7 @@
     "data:validate": "pnpm --filter @world26/data validate",
     "data:provenance": "pnpm --filter @world26/data provenance",
     "data:checksum": "pnpm --filter @world26/data checksum",
+    "data:sync": "node ./tools/data-sync/sync-all.js",
     "model:validate": "pnpm --filter @world26/model validate",
     "benchmark": "node ./tools/benchmarks/benchmark.js",
     "calibrate": "node ./tools/calibration/calibrate.js",

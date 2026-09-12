@@ -1,0 +1,107 @@
+{
+  "name": "world26-open-planetary-data",
+  "title": "WORLD//26 Open Planetary Systems Simulator Data Package",
+  "description": "Frictionless Data Package containing calibrated planetary boundary metrics, parameters, and historical empirical series (1960-2025) for independent planetary systems modeling.",
+  "version": "1.0.0",
+  "licenses": [
+    {
+      "name": "CC-BY-4.0",
+      "path": "https://creativecommons.org/licenses/by/4.0/",
+      "title": "Creative Commons Attribution 4.0 International"
+    },
+    {
+      "name": "Apache-2.0",
+      "path": "https://www.apache.org/licenses/LICENSE-2.0",
+      "title": "Apache License 2.0"
+    }
+  ],
+  "contributors": [
+    {
+      "title": "WORLD//26 Independent Research Consortium",
+      "role": "author"
+    }
+  ],
+  "resources": [
+    {
+      "name": "planetary-boundaries",
+      "path": "data/boundaries/current.json",
+      "format": "json",
+      "mediatype": "application/json",
+      "title": "Nine Planetary Boundaries Control Variables",
+      "description": "Quantified control variables, Holocene baselines, and safety thresholds grounded in Richardson et al. (Science 2023).",
+      "schema": {
+        "fields": [
+          { "name": "id", "type": "string" },
+          { "name": "name", "type": "string" },
+          { "name": "category", "type": "string" },
+          { "name": "currentValue", "type": "number" },
+          { "name": "boundaryThreshold", "type": "number" },
+          { "name": "dangerThreshold", "type": "number" },
+          { "name": "preIndustrialValue", "type": "number" },
+          { "name": "unit", "type": "string" },
+          { "name": "status", "type": "string", "constraints": { "enum": ["safe", "increasing_risk", "high_risk"] } }
+        ]
+      }
+    },
+    {
+      "name": "calibrated-parameters",
+      "path": "data/parameters/defaults.json",
+      "format": "json",
+      "mediatype": "application/json",
+      "title": "Calibrated Parameter Registry with Provenance",
+      "description": "Parameter values, uncertainty distributions, scientific citations, and empirical provenance.",
+      "schema": {
+        "fields": [
+          { "name": "key", "type": "string" },
+          { "name": "value", "type": "number" },
+          { "name": "unit", "type": "string" },
+          { "name": "lowerBound", "type": "number" },
+          { "name": "upperBound", "type": "number" },
+          { "name": "source", "type": "string" },
+          { "name": "confidence", "type": "string" }
+        ]
+      }
+    },
+    {
+      "name": "historical-series",
+      "path": "data/historical/world_historical_1960_2025.json",
+      "format": "json",
+      "mediatype": "application/json",
+      "title": "Global Historical Calibration Series (1960-2025)",
+      "description": "Composite observational calibration series from UN DESA, World Bank, NOAA GML, GCP, and FAOSTAT.",
+      "schema": {
+        "fields": [
+          { "name": "year", "type": "integer" },
+          { "name": "population", "type": "number", "unit": "billion persons" },
+          { "name": "gdp_ppp_trillion", "type": "number", "unit": "constant 2017 USD" },
+          { "name": "energy_ej", "type": "number", "unit": "EJ/year" },
+          { "name": "co2_emissions_gt", "type": "number", "unit": "Gt CO2/year" },
+          { "name": "co2_ppm", "type": "number", "unit": "parts per million" },
+          { "name": "temp_anomaly", "type": "number", "unit": "deg C above 1850-1900" },
+          { "name": "food_index", "type": "number", "unit": "index (1970=1.0)" },
+          { "name": "fertilizer_mt", "type": "number", "unit": "million metric tons" },
+          { "name": "life_expectancy", "type": "number", "unit": "years" },
+          { "name": "compute_eflops", "type": "number", "unit": "EFLOP/s" }
+        ]
+      }
+    },
+    {
+      "name": "regional-profiles",
+      "path": "data/regions/regions_10.json",
+      "format": "json",
+      "mediatype": "application/json",
+      "title": "10-Region Disaggregated Macro Profiles",
+      "description": "Initial state profiles, demographic shares, energy profiles, mineral reserves, and AI compute distribution across 10 macro regions.",
+      "schema": {
+        "fields": [
+          { "name": "id", "type": "string" },
+          { "name": "name", "type": "string" },
+          { "name": "population_share", "type": "number" },
+          { "name": "gdp_share", "type": "number" },
+          { "name": "installed_compute_share", "type": "number" },
+          { "name": "clean_energy_share", "type": "number" }
+        ]
+      }
+    }
+  ]
+}

@@ -34,6 +34,10 @@ export interface World26ModelParameters {
   food_waste_reduction_pct: number;
   circular_economy_mandate: number;
   universal_basic_services_strength: number;
+  amoc_collapse_threshold_temp: number;
+  permafrost_release_rate: number;
+  amazon_dieback_threshold_temp: number;
+  sea_level_rise_rate_m_per_c: number;
   [key: string]: number;
 }
 
@@ -57,6 +61,11 @@ export interface SimulationStepState {
   aragonite_saturation_state: number;
   human_wellbeing_index: number;
   gini_coefficient: number;
+  amoc_stability_index: number;
+  permafrost_thaw_co2_gt: number;
+  permafrost_cumulative_gt: number;
+  amazon_forest_fraction: number;
+  sea_level_rise_m: number;
   [key: string]: number;
 }
 

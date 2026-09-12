@@ -136,6 +136,12 @@ impl World26Model {
             governance_capacity_index: 0.40,
 
             global_trade_openness: 0.10,
+
+            amoc_stability_index: 1.0,
+            permafrost_thaw_co2_gt: 0.0,
+            permafrost_cumulative_gt: 0.0,
+            amazon_forest_fraction: 0.95,
+            sea_level_rise_m: 0.0,
         };
 
         Self { state, params }

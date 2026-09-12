@@ -1,7 +1,8 @@
 'use client';
 import React, { useRef, useState } from 'react';
-import { Share2, Download, Check, Copy, Sparkles, Shield } from 'lucide-react';
+import { Share2, Download, Check, Copy, Sparkles, Shield, BookOpen } from 'lucide-react';
 import { TrajectoryPoint } from './TrajectoryCharts';
+import { downloadJupyterNotebook } from '@/lib/jupyter-export';
 
 interface Props {
   scenarioName: string;
@@ -9,6 +10,7 @@ interface Props {
   dataPoint: TrajectoryPoint;
   baselinePoint?: TrajectoryPoint;
   transgressedBoundariesCount?: number;
+  parameters?: Record<string, number>;
 }
 
 export function WorldCardExport({
@@ -17,6 +19,7 @@ export function WorldCardExport({
   dataPoint,
   baselinePoint,
   transgressedBoundariesCount = 7,
+  parameters,
 }: Props) {
   const [copied, setCopied] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -115,6 +118,14 @@ export function WorldCardExport({
           >
             <Download className="w-3.5 h-3.5" />
             <span>Export SVG</span>
+          </button>
+          <button
+            onClick={() => downloadJupyterNotebook(scenarioName, parameters)}
+            className="flex items-center space-x-1 px-2.5 py-1 rounded bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold transition-all hover:scale-105 active:scale-95"
+            title="Download standalone Jupyter Notebook (.ipynb)"
+          >
+            <BookOpen className="w-3.5 h-3.5" />
+            <span>Export Jupyter (.ipynb)</span>
           </button>
         </div>
       </div>

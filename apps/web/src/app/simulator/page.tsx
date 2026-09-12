@@ -218,6 +218,7 @@ export default function SimulatorPage() {
                 scenarioName={currentScenario.name}
                 year={Math.round(currentYear)}
                 dataPoint={currentDataSlice}
+                parameters={currentScenario.parameterOverrides}
               />
             )}
           </div>
