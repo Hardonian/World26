@@ -1,0 +1,34 @@
+{
+  "name": "world26-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "WORLD//26 - An Open Planetary Systems Simulator",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:sim": "cargo test --all && pnpm --filter @world26/model test",
+    "test:e2e": "pnpm --filter @world26/web test:e2e",
+    "data:validate": "pnpm --filter @world26/data validate",
+    "data:provenance": "pnpm --filter @world26/data provenance",
+    "data:checksum": "pnpm --filter @world26/data checksum",
+    "model:validate": "pnpm --filter @world26/model validate",
+    "benchmark": "pnpm --filter @world26/sim-core bench",
+    "reproduce": "node ./tools/reproduce.js",
+    "cargo:fmt": "cargo fmt --check",
+    "cargo:clippy": "cargo clippy --all-targets --all-features -- -D warnings",
+    "cargo:test": "cargo test --all"
+  },
+  "devDependencies": {
+    "turbo": "^2.4.4",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.7"
+  },
+  "packageManager": "pnpm@11.8.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}

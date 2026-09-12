@@ -1,0 +1,16 @@
+[workspace]
+members = [
+    "packages/sim-core",
+    "packages/sim-wasm",
+]
+resolver = "2"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[profile.bench]
+opt-level = 3
+debug = false
