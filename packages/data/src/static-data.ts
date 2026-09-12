@@ -730,7 +730,7 @@ export const HISTORICAL_SERIES_DATA = {
       "compute_eflops": 350
     }
   ],
-  "lastSynced": "2026-09-12T15:24:28.675Z"
+  "lastSynced": "2026-09-12T15:30:32.677Z"
 } as any;
 
 export const REGIONS_DATA: { version: string; regions: RegionalProfile[] } = {
