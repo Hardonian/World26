@@ -39,12 +39,37 @@ describe('Data Package & Registry Validation', () => {
     expect(reg.regions.length).toBe(10);
   });
 
-  it('loads source registry', () => {
+  it('loads source registry with all 16 open source international providers', () => {
     const src = loadSources();
-    expect(src.sources.length).toBeGreaterThan(5);
+    expect(src.sources.length).toBe(16);
+    const sourceIds = src.sources.map((s: any) => s.id);
+    expect(sourceIds).toContain('noaa_gml_mauna_loa');
+    expect(sourceIds).toContain('nasa_gistemp');
+    expect(sourceIds).toContain('our_world_in_data');
+    expect(sourceIds).toContain('ember_electricity_review');
+    expect(sourceIds).toContain('usgs_mineral_commodity');
+    expect(sourceIds).toContain('wri_aqueduct');
+    expect(sourceIds).toContain('epoch_ai_compute');
+  });
+
+  it('queries GlobalOpenDataHub for latest planetary observations with fallback', async () => {
+    const { defaultOpenDataHub } = await import('./connectors/index.js');
+    const co2Obs = await defaultOpenDataHub.getLatestObservation('atmospheric_co2_ppm');
+    expect(co2Obs.value).toBeGreaterThan(400);
+    expect(co2Obs.unit).toBe('ppm');
+    expect(co2Obs.sourceId).toBe('noaa_gml_mauna_loa');
+
+    const tempObs = await defaultOpenDataHub.getLatestObservation('temperature_anomaly');
+    expect(tempObs.value).toBeGreaterThan(1.0);
+    expect(tempObs.unit).toBe('°C');
+
+    const connectors = await defaultOpenDataHub.checkAllConnectors();
+    expect(connectors.length).toBe(16);
+    expect(connectors.every(c => c.status === 'ONLINE' || c.status === 'FALLBACK_CACHED')).toBe(true);
   });
 
   it('runs validation function without throwing', () => {
     expect(() => validateData()).not.toThrow();
   });
 });
+

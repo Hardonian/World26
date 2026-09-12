@@ -9,8 +9,10 @@
     "start": "next start",
     "lint": "echo '@world26/web: lint passed'",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
     "test:e2e": "echo 'E2E smoke test passed'"
   },
+
   "dependencies": {
     "@world26/analytics": "workspace:*",
     "@world26/data": "workspace:*",

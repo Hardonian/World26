@@ -22,12 +22,14 @@ import { PolicyComposer, DEFAULT_POLICIES, PolicyState } from '@/components/Poli
 import { WorldViewMap } from '@/components/WorldViewMap';
 import { WorldCardExport } from '@/components/WorldCardExport';
 import { ScientificBadge } from '@/components/ScientificBadge';
+import { ScenarioCopilot } from '@/components/ScenarioCopilot';
 import { runWorld26Simulation, SimulationResultBundle } from '@/lib/simulator';
 import { BUILTIN_SCENARIOS } from '@world26/model';
 
 type CenterViewMode = 'trajectory' | 'boundaries' | 'map' | 'export';
 
 export default function SimulatorPage() {
+
   const [selectedScenarioId, setSelectedScenarioId] = useState<string>('baseline_2026');
   const [policies, setPolicies] = useState<PolicyState>(DEFAULT_POLICIES);
   const [simResult, setSimResult] = useState<SimulationResultBundle | null>(null);
@@ -131,7 +133,16 @@ export default function SimulatorPage() {
       {/* Main 3-Column Simulator Layout */}
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-0 overflow-y-auto lg:overflow-hidden">
         {/* LEFT COLUMN: Policy & Scenario Composer (3 cols) */}
-        <div className="lg:col-span-3 border-r border-slate-800/80 p-3 overflow-y-auto max-h-none lg:max-h-[calc(100vh-140px)] bg-[#070a0f]/90">
+        <div className="lg:col-span-3 border-r border-slate-800/80 p-3 overflow-y-auto max-h-none lg:max-h-[calc(100vh-140px)] bg-[#070a0f]/90 space-y-3">
+          <ScenarioCopilot
+            currentParams={policies as any}
+            onApplyOverrides={(overrides) => {
+              setPolicies((prev) => ({
+                ...prev,
+                ...overrides,
+              }));
+            }}
+          />
           <PolicyComposer
             selectedScenarioId={selectedScenarioId}
             onSelectScenario={setSelectedScenarioId}
@@ -140,6 +151,7 @@ export default function SimulatorPage() {
             onResetPolicies={handleResetPolicies}
           />
         </div>
+
 
         {/* CENTER COLUMN: Visualizations & Trajectories (6 cols) */}
         <div className="lg:col-span-6 flex flex-col p-3 overflow-y-auto max-h-none lg:max-h-[calc(100vh-140px)] space-y-3 bg-slate-950/40">
