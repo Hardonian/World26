@@ -11,11 +11,13 @@ import {
   FlaskConical, 
   RotateCcw, 
   Database,
-  Cpu
+  Cpu,
+  MapPin
 } from 'lucide-react';
 
 const NAV_ITEMS = [
   { href: '/simulator', label: 'Simulator', icon: Activity },
+  { href: '/regions', label: '10 Regions', icon: MapPin },
   { href: '/boundaries', label: 'Boundaries', icon: Globe },
   { href: '/causal', label: 'Causal Graph', icon: GitFork },
   { href: '/compare', label: 'Compare', icon: Columns },
@@ -24,6 +26,7 @@ const NAV_ITEMS = [
   { href: '/reproduce', label: 'Reproduce', icon: RotateCcw },
   { href: '/sources', label: 'Sources', icon: Database },
 ];
+
 
 export function HeaderNav() {
   const pathname = usePathname();

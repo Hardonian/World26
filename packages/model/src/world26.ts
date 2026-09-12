@@ -16,10 +16,14 @@ export const DEFAULT_WORLD26_PARAMETERS: World26ModelParameters = {
   compute_demand_growth_rate: 0.35,
   hardware_lifetime_years: 3.5,
   datacenter_pue: 1.25,
+  datacenter_pue_target: 1.12,
   water_cooling_liters_per_kwh: 1.8,
   recycling_target_share: 0.40,
   ai_productivity_elasticity: 0.08,
   jevons_rebound_factor: 1.2,
+  ai_training_compute_share: 0.35,
+  post_silicon_transition_year: 2038.0,
+  photonic_efficiency_multiplier: 4.0,
   carbon_tax_usd_per_ton: 0.0,
   food_waste_reduction_pct: 0.0,
   circular_economy_mandate: 0.0,
@@ -82,6 +86,10 @@ export class World26SimulatorTs {
       aod_difference: 0.015,
       ozone_dobson_units: 300.0,
       installed_compute_eflops: 0.0,
+      ai_training_compute_eflops: 0.0,
+      ai_inference_compute_eflops: 0.0,
+      ai_effective_pue: 1.25,
+      optical_compute_share: 0.0,
       accelerator_fleet_millions: 0.0,
       datacenter_capital_billion: 0.0,
       ai_electricity_demand_twh: 0.0,
@@ -110,9 +118,20 @@ export class World26SimulatorTs {
     const ai_active = t >= 2015.0;
     const t_ai = Math.max(0, t - 2020.0);
 
+    // Dynamic PUE trajectory: modern liquid & immersion cooling phase-in
+    const pue_progress = Math.min(1.0, Math.max(0, (t - 2020.0) / 25.0));
+    s.ai_effective_pue = this.params.datacenter_pue - pue_progress * (this.params.datacenter_pue - this.params.datacenter_pue_target);
+
+    // Post-silicon optical / photonic / neuromorphic computing transition
+    const t_post = Math.max(0, t - this.params.post_silicon_transition_year);
+    s.optical_compute_share = t >= this.params.post_silicon_transition_year
+      ? Math.min(0.85, 1.0 - Math.exp(-t_post / 8.0))
+      : 0.0;
+    const optical_eff_boost = 1.0 + s.optical_compute_share * (this.params.photonic_efficiency_multiplier - 1.0);
+
     // AI efficiency & compute growth
     const eff_growth = Math.max(0.02, 0.22 * (1.0 - 0.03 * t_ai));
-    s.ai_hardware_efficiency_petaflops_per_kw = 0.05 * Math.pow(1.0 + eff_growth, t_ai);
+    s.ai_hardware_efficiency_petaflops_per_kw = 0.05 * Math.pow(1.0 + eff_growth, t_ai) * optical_eff_boost;
 
     const base_demand_growth = ai_active
       ? this.params.compute_demand_growth_rate * (1.0 + (this.params.jevons_rebound_factor - 1.0) * 0.2)
@@ -124,13 +143,20 @@ export class World26SimulatorTs {
       : 0;
 
     s.installed_compute_eflops = Math.max(0, s.installed_compute_eflops + d_compute * dt);
+
+    // Training vs inference compute split
+    const inf_shift = Math.min(0.25, Math.max(0, (t - 2020.0) / 20.0) * 0.25);
+    const dynamic_training_share = Math.max(0.10, this.params.ai_training_compute_share - inf_shift);
+    s.ai_training_compute_eflops = s.installed_compute_eflops * dynamic_training_share;
+    s.ai_inference_compute_eflops = s.installed_compute_eflops * (1.0 - dynamic_training_share);
+
     s.accelerator_fleet_millions = Math.max(0, (s.installed_compute_eflops * 1000.0) / 2.0);
     s.datacenter_capital_billion = s.accelerator_fleet_millions * 35.0;
 
     // AI Electricity & Water
     const ai_power_gw =
       (s.installed_compute_eflops * 1000.0 / Math.max(0.01, s.ai_hardware_efficiency_petaflops_per_kw)) * 1e-3;
-    s.ai_electricity_demand_twh = ai_power_gw * 8.76 * this.params.datacenter_pue;
+    s.ai_electricity_demand_twh = ai_power_gw * 8.76 * s.ai_effective_pue;
     const ai_water_liters = s.ai_electricity_demand_twh * 1.0e9 * this.params.water_cooling_liters_per_kwh;
     s.datacenter_water_consumption_km3 = ai_water_liters / 1.0e12;
     s.ai_water_withdrawal_million_m3 = s.datacenter_water_consumption_km3 * 1000.0;
