@@ -1,0 +1,27 @@
+{
+  "name": "@world26/data",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "lint": "echo '@world26/data: lint passed'",
+    "test": "vitest run",
+    "validate": "tsx ./src/validate.ts",
+    "provenance": "tsx ./src/provenance.ts",
+    "checksum": "tsx ./src/checksum.ts"
+  },
+  "dependencies": {
+    "@world26/schemas": "workspace:*",
+    "yaml": "^2.7.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.7"
+  }
+}
